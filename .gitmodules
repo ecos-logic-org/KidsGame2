@@ -1,0 +1,12 @@
+[submodule "android.core.services"]
+	path = android.core.services
+	url = https://github.com/ecos-logic-org/android.core.services.git
+[submodule "android.services.media"]
+	path = android.services.media
+	url = https://github.com/ecos-logic-org/android.services.media.git
+[submodule "android.services.speech"]
+	path = android.services.speech
+	url = https://github.com/ecos-logic-org/android.services.speech.git
+[submodule "services.interfaces.speech"]
+	path = services.interfaces.speech
+	url = https://github.com/ecos-logic-org/services.interfaces.speech.git
