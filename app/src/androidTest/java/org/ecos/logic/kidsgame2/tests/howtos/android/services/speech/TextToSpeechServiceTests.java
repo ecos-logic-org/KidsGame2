@@ -16,12 +16,13 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class TextToSpeechServiceTests {
     private SpeechEngine mSpeechEngine;
+    private ApplicationContextResolver mApplicationContextResolver;
 
     @Before
     public void setUp() throws Exception {
         Context applicationContext = InstrumentationRegistry.getTargetContext();
-        ApplicationContextResolver applicationContextResolver = new ApplicationContextResolverImpl(applicationContext);
-        mSpeechEngine = new TTSSpeechEngine(applicationContextResolver);
+        mApplicationContextResolver = new ApplicationContextResolverImpl(applicationContext);
+        mSpeechEngine = new TTSSpeechEngine(mApplicationContextResolver);
     }
 
     @Test
@@ -42,23 +43,43 @@ public class TextToSpeechServiceTests {
 
     @Test
     public void howToEvents() throws NotInitialized, InterruptedException {
+        mSpeechEngine.speak("");
+        Thread.sleep(1500);
         mSpeechEngine.speak("ca",this::ce);
+        Thread.sleep(1500+1500+1500+1500+1500+1500+1500);
     }
 
     private void ce() throws NotInitialized {
+        reInit();
+
         mSpeechEngine.speak("ce",this::ci);
     }
 
+    private void reInit(){
+        mSpeechEngine = new TTSSpeechEngine(mApplicationContextResolver);
+        try {
+            mSpeechEngine.speak("");
+            Thread.sleep(1500);
+        } catch (NotInitialized|InterruptedException  throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
     private void ci() throws NotInitialized {
+        reInit();
+
         mSpeechEngine.speak("ci",this::co);
     }
 
     private void co() throws NotInitialized {
-        mSpeechEngine.speak("ci",this::cu);
+        reInit();
+
+        mSpeechEngine.speak("co",this::cu);
     }
 
     private void cu() throws NotInitialized {
+        reInit();
+
         mSpeechEngine.speak("cu");
     }
-
 }
